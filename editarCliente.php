@@ -74,10 +74,10 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group"><label for="formMunc">Município *</label>
-                                                        <select class="form-control form-select form-select-lg mb-3" name="CD_MUNICIPIO" id="formMunc">
+                                                        <select class="form-control form-select form-select-lg mb-3" name="ID_MUNICIPIO" id="formMunc">
                                                             <option value="<?=$cliente['CD_MUNICIPIO']; ?>" selected><?=$cliente['NM_MUNICIPIO']; ?></option>
                                                             <?php
-                                                                $url = "https://servicodados.ibge.gov.br/api/v1/localidades/distritos";
+                                                                $url = "https://servicodados.ibge.gov.br/api/v1/localidades/distritos?orderBy=nome";
                                                                 $ch = curl_init();
                                                                 curl_setopt($ch, CURLOPT_URL, $url);
                                                                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

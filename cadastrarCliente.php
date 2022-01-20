@@ -1,14 +1,4 @@
-<?php
-$url = "https://servicodados.ibge.gov.br/api/v1/localidades/distritos";
-$ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, $url);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-$resp = curl_exec($ch);
-if ($e = curl_error($ch)) {
-    echo $e;
-} else {
-    $decoded = json_decode($resp, true);
-?>
+
     <!DOCTYPE html>
     <html lang="pt-br">
 
@@ -67,13 +57,22 @@ if ($e = curl_error($ch)) {
                                                         <div class="form-group"><label for="formMunicípio">Município *</label>
                                                             <select id="formMunicípio" name="ID_MUNICIPIO" class="form-control" required="required" data-error="Campo necessário.">
                                                                 <option value="" selected>Selecione seu município</option>
-                                                            <?php
-                                                            foreach ($decoded as $val) {
-                                                                    echo "<option value='{[".$val['id'].",".$val['nome']."]}'>".$val['nome']."</option>";
-                                                                }
-                                                            }
-                                                            curl_close($ch);
-                                                            ?>
+                                                                <?php
+                                                                    $url = "https://servicodados.ibge.gov.br/api/v1/localidades/distritos?orderBy=nome";
+                                                                    $ch = curl_init();
+                                                                    curl_setopt($ch, CURLOPT_URL, $url);
+                                                                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                                                                    $resp = curl_exec($ch);
+                                                                    if ($e = curl_error($ch)) {
+                                                                        echo $e;
+                                                                    } else {
+                                                                        $decoded = json_decode($resp, true);
+                                                                        foreach ($decoded as $val) {
+                                                                            echo "<option value='{[".$val['id'].",".$val['nome']."]}'>".$val['nome']."</option>";
+                                                                        }
+                                                                    }
+                                                                    curl_close($ch);
+                                                                ?>
                                                             </select>
                                                         </div>
                                                     </div>

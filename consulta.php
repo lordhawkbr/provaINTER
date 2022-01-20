@@ -26,8 +26,7 @@
                 break;
 
             default:
-                # code...
-            break;
+                break;
         }
         if($sqlFilter -> rowCount() > 0){
             $listClientes = $sqlFilter -> FetchAll(PDO::FETCH_ASSOC);
@@ -37,7 +36,7 @@
             INNER JOIN assc_contrato_cliente ON assc_contrato_cliente.CD_CLIENTE = cliente.CD_CLIENTE
             INNER JOIN contrato ON assc_contrato_cliente.CD_CONTRATO = contrato.CD_CONTRATO");
 
-        $filtro1 = $pdo->query("select count(CD_CLIENTE),NM_MUNICIPIO from cliente group by CD_MUNICIPIO");
+        $filtro1 = $pdo->query("select count(CD_CLIENTE),NM_MUNICIPIO from cliente group by CD_MUNICIPIO order by count(CD_CLIENTE) desc");
         $filtro2 = $pdo->query("select * from contrato where DT_ASS between '2022-01-01' and '2022-12-31'");
         $filtro3 = $pdo->query("SELECT sum(contrato.vr_contrato),cliente.nm_municipio FROM cliente
         INNER JOIN assc_contrato_cliente ON assc_contrato_cliente.CD_CLIENTE = cliente.CD_CLIENTE
